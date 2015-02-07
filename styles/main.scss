@@ -1,0 +1,24 @@
+@import 'bourbon/bourbon';
+@import 'neat/neat';
+
+
+$default-font-size: em(16px);
+$default-color: #000;
+
+
+
+
+
+
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+body {
+  color: $default-color;
+  font-size: $default-font-size;
+
+}

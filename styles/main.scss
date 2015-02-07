@@ -2,7 +2,25 @@
 @import 'neat/neat';
 
 
-$default-font-size: em(16px);
+//neat variables
+//$local-max-width: % or unit for an element
+/* @mixin outer-container(\$local-max-width: \$max-width) {
+
+}
+ */
+
+
+
+$max-width: em(1200); //(1088) default in px
+/* \$column: same unit as \$gutter */
+
+$grid-columns: 18;
+$gutter: 0;
+
+$border-box-sizing: true;
+
+
+$default-font-size: em(9px);
 $default-color: #000;
 
 
@@ -14,6 +32,8 @@ $default-color: #000;
 *,
 *:before,
 *:after {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
@@ -21,4 +41,22 @@ body {
   color: $default-color;
   font-size: $default-font-size;
 
+}
+
+.container {
+  @include outer-container($max-width);
+}
+
+.box {
+  @include span-columns(2);
+/*   @include omega; */
+  margin: 0;
+  border: 1px solid black;
+  width: 11.1111%;
+  height: 100px;
+
+}
+
+.box:nth-child(9n) {
+  @include omega;
 }

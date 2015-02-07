@@ -8,13 +8,45 @@ html {
   -moz-box-sizing: inherit;
   box-sizing: inherit; }
 
+/* @mixin outer-container(\$local-max-width: \$max-width) {
+
+}
+ */
+/* \$column: same unit as \$gutter */
 *,
 *:before,
 *:after {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box; }
 
 body {
   color: #000;
-  font-size: 1em; }
+  font-size: 0.5625em; }
+
+.container {
+  max-width: 75em;
+  margin-left: auto;
+  margin-right: auto; }
+  .container::after {
+    clear: both;
+    content: "";
+    display: table; }
+
+.box {
+  float: left;
+  display: block;
+  margin-right: 1.55951%;
+  width: 9.72488%;
+  /*   @include omega; */
+  margin: 0;
+  border: 1px solid black;
+  width: 11.1111%;
+  height: 100px; }
+  .box:last-child {
+    margin-right: 0; }
+
+.box:nth-child(9n) {
+  margin-right: 0; }
 
 /*# sourceMappingURL=main.css.map */

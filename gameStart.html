@@ -7,32 +7,52 @@
 </head>
 <body>
 
-  <h1 class="page-title">Choose Your Game</h1>
+  <h1 class="page-title">Choose Your Players</h1>
 
   <div class="menu-wrap">
     <form id="game-selections">
       <div class="hero-select-wrap">
-      <h2 class="subtitle">Puppy Saviors</h2>
 
-    <input type="radio" name="hero-select" value="Gandalf" id="Gandalf" autofocus><label for="Gandalf">Gandalf</label>
-    <input type="radio" name="hero-select" value="Hulk" id="Hulk"><label for="Hulk">Hulk</label>
-    <input type="radio" name="hero-select" value="Toto" id="Toto"><label for="Toto">Toto</label>
+      <h2 class="title selections-title">Puppy Saviors</h2>
+
+
+    <div class="input-wrap">
+    <input type="radio" name="hero-select" value="Gandalf"
+     id="Gandalf" autofocus><label for="Gandalf">Gandalf</label><!-- <img src="#" width="50" height="100" />  -->
+    </div>
+
+
+
+    <input type="radio" name="hero-select" value="Hulk"
+     id="Hulk"><label for="Hulk">Hulk</label>
+    <input type="radio" name="hero-select" value="Toto"
+     id="Toto"><label for="Toto">Toto</label>
 
   </div> <!-- .hero-select-wrap-->
 
     <div class="villain-select-wrap">
 
-      <h2 class="subtitle">Puppy Killers</h2>
+      <h2 class="title selections-title">Puppy Killers</h2>
 
       <input type="radio" name="villain-select" value="wolf" id="wolf" autofocus><label for="wolf">Big Bad Wolf</label>
       <input type="radio" name="villain-select" value="vader" id="vader"><label for="vader">Darth Vader</label>
 
-      <input type="radio" name="villain-select" value="witch" id="witch"><label for="witch">Wicked Witch of the West</label>
+      <input type="radio" name="villain-select" value="witch" id="witch"><label for="witch">Wicked Witch</label>
 
 
     </div><!-- .villain-select-wrap -->
 
+    <div class="game-type-wrap selections-title">
+      <h2 class="selections-title game-type-title">Choose Your Game Type</h2>
 
+      <input type="radio" name="game-type" id="computer-game" value="Play Computer" class="game-type" ><label for="computer-game" class="input-left">Play the Computer</label>
+      <input type="radio" name="game-type" id="player-game" value="Play another Human Being" class="game-type" ><label for="player-game">Play another Human Being</label>
+
+    </div><!-- .game-type-wrap -->
+
+
+
+    <button type="submit" class="start-game attack" value="startGame">Start Game</button>
 
 
 

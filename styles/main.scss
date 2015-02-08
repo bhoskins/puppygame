@@ -208,3 +208,65 @@ body {
   background: red;
   color: white;
 }
+
+/***************************************************
+      Select Page styles below
+  **************************************************/
+.menu-wrap {
+  display: block;
+  margin: 0 auto;
+  width: 80%;
+}
+
+.selections-title {
+  text-align: center;
+  color: blue;
+}
+
+.hero-select-wrap,
+.villain-select-wrap {
+  display: inline-block;
+  border: 1px solid black;
+  padding: 20px;
+  width: 48%;
+  height: 300px;
+/*   text-align: center; */
+}
+
+.hero-select-wrap input,
+.villain-select-wrap input {
+  display: block;
+  text-align: left;
+}
+
+.input-wrap {
+  position: relative;
+}
+
+input {
+  display: inline-block;
+  padding: 20px;
+}
+
+label {
+  display: inline-block;
+  margin-left: 30px;
+  color: #666;
+  font-size: 5em;
+}
+
+.start-game {
+  background-color: blue;
+  color: white;
+}
+
+.game-type-title {
+  display: block;
+  margin: 20px;
+  font-size: 5em;
+
+}
+
+.input-left {
+  margin-right: 50px;
+}

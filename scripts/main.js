@@ -3,7 +3,7 @@
 
 
   $(document).ready(function(){
-      console.log('im ready');
+      // console.log('im ready');
 
     //Game Board Constructor
     var GameBoard = function(option){
@@ -36,7 +36,7 @@ GameBoard.prototype.loadMeds = function(){
       var y = posArr[1];
       // console.log("x is: " + x + " y is: " + y);
        var divClass = "\.pos" + x + "\-" + y;
-       console.log(divClass);
+      //  console.log(divClass);
       //  var $divTarget = $('div').attr('class', divClass);
       //  console.log($divTarget);
       //  $divTarget.css("background-color",
@@ -215,6 +215,7 @@ var Character = function(option){
   this.specialPower = option.specialPower;
   this.status = option.status;
   this.startPosition = option.startPosition;
+  this.currentPosition = option.currentPosition;
 };
 
 Character.prototype.loadPlayer = function(){
@@ -225,7 +226,7 @@ Character.prototype.loadPlayer = function(){
     var y = posPlayer[1];
     // console.log("x is: " + x + " y is: " + y);
      var divClass = "\.pos" + x + "-" + y;
-     console.log("this is player 1 pos: " + divClass);
+    //  console.log("this is player 1 pos: " + divClass);
   // $('.container').find('div' + '.' + divClass).hasClass(divClass);
     $(divClass).css("background",
       this.playerColor );
@@ -236,12 +237,27 @@ Character.prototype.loadPlayer = function(){
 
 };
 
+// player selects a hero and a villain.
+//villian is set to activePlayer;
+// at end of turn activePlayer changed to hero and
+//   playerTurn() called for activePlayer.
+var activePlayer;
+activePlayer = witch;
+
+Character.prototype.changeTurn = function(){
+
+
+
+};
+
 var hulk = new Character({
   name: 'Hulk',
   playerColor: 'green',
   specialPower: "strength",
   status: "",
-  startPosition: "1_6"
+  startPosition: "1_6",
+  currentPosition: '1_6',
+  isActive: false
 });
 
 var gandalf = new Character({
@@ -249,7 +265,9 @@ var gandalf = new Character({
   playerColor: "gray",
   specialPower: "stun spell",
   status: "",
-  startPosition: '1_6'
+  startPosition: '1_6',
+  currentPosition: '1_6',
+  isActive: false
 });
 
 var toto= new Character({
@@ -257,31 +275,39 @@ var toto= new Character({
   playerColor: "#262626",
   specialPower: "fast",
   status: "",
-  startPosition: '1_6'
+  startPosition: '1_6',
+  currentPosition: '1_6',
+  isActive: false
 });
 
 var wolf = new Character({
   name: "Big Bad Wolf",
   playerColor: "#1d1f21",
   specialPower: "pack power\, regenerates",
-  status: "",
-  startPosition: '9_2'
+  status: "active",
+  startPosition: '9_2',
+  currentPosition: '9_2',
+  isActive: true
 });
 
 var dvader = new Character({
   name: "Darth Vader",
   playerColor: "black",
   specialPower: "evil stare\, kills from a distance",
-  status: "",
-  startPosition: '9_2'
+  status: "active",
+  startPosition: '9_2',
+  currentPosition: '9_2',
+  isActive: true
 });
 
 var witch = new Character({
   name: "Wicked Witch",
   playerColor: "#006f38",
   specialPower: "pack power\, regenerates",
-  status: "",
-  startPosition: '9_2'
+  status: "active",
+  startPosition: '9_2',
+  currentPosition: '9_2',
+  isActive: true
 });
 
 witch.loadPlayer();

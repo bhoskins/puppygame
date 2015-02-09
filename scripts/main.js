@@ -5,6 +5,9 @@
   $(document).ready(function(){
       // console.log('im ready');
 
+      var width;
+      var height;
+
     //Game Board Constructor
     var GameBoard = function(option){
       this.x = option.x;
@@ -76,6 +79,8 @@ var game1 = new GameBoard({
 });
 
 
+
+
 // Take width(x) and height(y) of gameboard and create divs
 //   with class="box posx-y"
 function gbDivs(x, y) {
@@ -94,6 +99,7 @@ function gbDivs(x, y) {
 
       $(".container").append("<div class=\'box " + className + "\'" + "></div>" );
 
+
       }
 
     }
@@ -111,6 +117,8 @@ function gbDivs(x, y) {
   }
 }
 
+width = game1.x;
+height = game1.y;
 gbDivs(game1.x, game1.y);
 
 game1.loadMeds();
@@ -213,7 +221,8 @@ var Character = function(option){
   this.name = option.name;
   this.playerColor = option.playerColor;
   this.specialPower = option.specialPower;
-  this.status = option.status;
+  this.isPlayer = option.isPlayer;
+  this.isActive = option.isActive;
   this.startPosition = option.startPosition;
   this.currentPosition = option.currentPosition;
 };
@@ -231,6 +240,8 @@ Character.prototype.loadPlayer = function(){
     $(divClass).css("background",
       this.playerColor );
 
+
+
   } else{
           return;
   }
@@ -241,77 +252,354 @@ Character.prototype.loadPlayer = function(){
 //villian is set to activePlayer;
 // at end of turn activePlayer changed to hero and
 //   playerTurn() called for activePlayer.
-var activePlayer;
-activePlayer = witch;
+
+function posToDivClass(pos){
+
+  var divClassNum = pos.replace(/\_/, "\-");
+  var divClass = ".pos" + divClassNum;
+  return divClass;
+}
+
+function getPosXY(pos){
+  var posSplit = pos.split("_");
+  var x = posSplit[0];
+  var y = posSplit[1];
+  var coord = [x, y];
+  return coord;
+}
+
+function divClassToPos(item){
+  var posPre = item.replace(/-/, "\_");
+  var pos = posPre.substr(4, 3);
+  return pos;
+}
 
 Character.prototype.changeTurn = function(){
-
-
-
+  var prevPlayer = activePlayer;
+  activePlayer = inactivePlayer;
+  prevPlayer = inactivePlayer;
+  activePlayer.playerTurn();
+  console.log("active player after changeTurn is: " + activePlayer);
 };
+
+Character.prototype.playerTurn = function(){
+  var posPlayer = (activePlayer.currentPosition).split("_");
+
+  var x = posPlayer[0];
+  var y = posPlayer[1];
+
+  var divClassNum = (activePlayer.startPosition).replace(/_/, "-");
+  var divClass = ".pos" + divClassNum;
+
+  // 5 possible moves:
+  // stay at current positon  stay
+  $(divClass).css("border", "2px solid blue");
+
+//(x+1), y  if x+1 <= width step right
+  var stepRightx = parseInt(x) + 1;
+//step right pos and divClass
+    var divClassStepRight = ".pos" + stepRightx + "-" + y;
+    var posStepRight = divClassToPos(divClassStepRight);
+    console.log('posStepRight ' + posStepRight);
+//step left pos and divClass
+    var stepLeftx = parseInt(x) - 1;
+      var divClassStepLeft = ".pos" + stepLeftx + "-" + y;
+      var posStepLeft = divClassToPos(divClassStepLeft);
+//step up pos and divClass
+      var stepUpy = parseInt(y) - 1;
+
+      var divClassStepUp = ".pos" + x + "-" + stepUpy;
+      var posStepUp = divClassToPos(divClassStepUp);
+// step down pos and divClass
+      var stepDowny = parseInt(y) + 1;
+      var divClassStepDown = ".pos" + x + "-" + stepDowny;
+      var posStepDown = divClassToPos(divClassStepDown);
+
+    var testobstImov = _.contains(game1.obstImov, posStepRight);
+
+    if (stepRightx <= width && testobstImov !== true){
+      $(divClassStepRight).css("border", "2px solid blue");
+
+      $(divClassStepRight).on("click", function(){
+        activePlayer.currentPosition = posStepRight;
+        $(divClassStepRight).css("background", activePlayer.playerColor);
+        $(divClass).css({
+          "background": "initial",
+          "border": "none"
+        });
+        console.log('divclassstepright ' + divClassStepRight);
+        console.log('divClass ' + divClass);
+        $(divClassStepRight).css("border", "none");
+        $(divClassStepLeft).css("border", "none");
+        $(divClassStepUp).css("border", "none");
+        $(divClassStepDown).css("border", "none");
+        $(divClassStepRight).off();
+
+        activePlayer.changeTurn();
+
+      });
+  }
+
+// step left
+    testobstImov = _.contains(game1.obstImov, posStepLeft);
+
+  if(stepLeftx > 0 && testobstImov !==true){
+    $(divClassStepLeft).css("border", "2px solid blue");
+
+    $(divClassStepLeft).on("click", function(){
+      activePlayer.currentPosition = posStepLeft;
+      $(divClassStepLeft).css("background", activePlayer.playerColor);
+      $(divClass).css("background", "initial");
+      $(divClass).off();
+      $(divClass).css("border", "none");
+      $(divClassStepRight).css("border", "none");
+      $(divClassStepLeft).css("border", "none");
+      $(divClassStepUp).css("border", "none");
+      $(divClassStepDown).css("border", "none");
+
+      activePlayer.changeTurn();
+
+    });
+  }
+
+// step up
+
+    testobstImov = _.contains(game1.obstImov, posStepUp);
+
+    if(stepUpy > 0 && testobstImov !== true ){
+      $(divClassStepUp).css("border", "2px solid blue");
+
+      $(divClassStepUp).on("click", function(){
+        activePlayer.currentPosition = posStepUp;
+        $(divClassStepUp).css("background", activePlayer.playerColor);
+        $(divClass).css("background", "initial");
+        $(divClass).off();
+        $(divClass).css("border", "none");
+        $(divClassStepRight).css("border", "none");
+        $(divClassStepLeft).css("border", "none");
+        $(divClassStepUp).css("border", "none");
+        $(divClassStepDown).css("border", "none");
+
+        activePlayer.changeTurn();
+
+      });
+    }
+
+
+
+// step down
+
+    testobstImov = _.contains(game1.obstImov, posStepDown);
+    if(stepDowny <= height && testobstImov !== true ){
+      $(divClassStepDown).css("border", "2px solid blue");
+
+      $(divClassStepDown).on("click", function(){
+        activePlayer.currentPosition = posStepDown;
+        $(divClassStepDown).css("background", activePlayer.playerColor);
+        $(divClass).css("background", "initial");
+        $(divClassStepDown).off();
+        $(divClass).css("border", "none");
+        $(divClassStepRight).css("border", "none");
+        $(divClassStepLeft).css("border", "none");
+        $(divClassStepUp).css("border", "none");
+        $(divClassStepDown).css("border", "none");
+
+
+        activePlayer.changeTurn();
+
+      });
+  }
+};
+
+
+
+// obstImov, obstMov, hazards, meds, goals
+
+
+
+
+
+
+
 
 var hulk = new Character({
   name: 'Hulk',
   playerColor: 'green',
   specialPower: "strength",
-  status: "",
+  isPlayer: false,
+  isActive: false,
   startPosition: "1_6",
   currentPosition: '1_6',
-  isActive: false
 });
 
 var gandalf = new Character({
   name: "Gandalf",
   playerColor: "gray",
   specialPower: "stun spell",
-  status: "",
+  isPlayer: false,
+  isActive: false,
   startPosition: '1_6',
   currentPosition: '1_6',
-  isActive: false
 });
 
 var toto= new Character({
   name: "Toto",
   playerColor: "#262626",
   specialPower: "fast",
-  status: "",
+  isPlayer: false,
+  isActive: false,
   startPosition: '1_6',
   currentPosition: '1_6',
-  isActive: false
+});
+
+var player2 = new Character({
+  name: "Player 2",
+  playerColor: "purple",
+  specialPower: "",
+  isPlayer: false,
+  isActive: false,
+  startPosition: '9_2',
+  currentPosition: '9_2',
 });
 
 var wolf = new Character({
   name: "Big Bad Wolf",
   playerColor: "#1d1f21",
   specialPower: "pack power\, regenerates",
-  status: "active",
+  isPlayer: true,
+  isActive: true,
   startPosition: '9_2',
   currentPosition: '9_2',
-  isActive: true
 });
 
-var dvader = new Character({
+var vader = new Character({
   name: "Darth Vader",
   playerColor: "black",
   specialPower: "evil stare\, kills from a distance",
-  status: "active",
+  IsPlayer: false,
+  isActive: true,
   startPosition: '9_2',
   currentPosition: '9_2',
-  isActive: true
 });
 
 var witch = new Character({
   name: "Wicked Witch",
   playerColor: "#006f38",
   specialPower: "pack power\, regenerates",
-  status: "active",
+  isPlayer: false,
+  isActive: true,
   startPosition: '9_2',
   currentPosition: '9_2',
-  isActive: true
 });
 
-witch.loadPlayer();
-toto.loadPlayer();
+// witch.loadPlayer();
+// toto.loadPlayer();
+
+var activePlayer;
+var inactivePlayer;
+
+
+$('#Gandalf').on("click", function (){
+  inactivePlayer = gandalf;
+  gandalf.isActive = false;
+  gandalf.isPlayer = true;
+  hulk.isPlayer = false;
+  hulk.isActive = false;
+  toto.isPlayer = false;
+  toto.isActive = false;
+  // console.log(gandalf.isPlayer);
+  // console.log(gandalf.isActive);
+});
+
+$('#Hulk').on("click", function (){
+  inactivePlayer = hulk;
+  hulk.isActive = false;
+  hulk.isPlayer = true;
+  gandalf.isPlayer = false;
+  gandalf.isActive = false;
+  toto.isPlayer = false;
+  toto.isActive = false;
+});
+
+$('#Toto').on("click", function (){
+  inactivePlayer = toto;
+  toto.isActive = false;
+  toto.isPlayer = true;
+  gandalf.isPlayer= false;
+  gandalf.isActive = false;
+  hulk.isPlayer = false;
+  hulk.isActive = false;
+});
+
+$('#wolf').on("click", function (){
+  activePlayer = wolf;
+  wolf.isActive = true;
+  wolf.isPlayer= true;
+  vader.isPlayer = false;
+  vader.isActive = false;
+  witch.isPlayer = false;
+  witch.isActive = false;
+});
+
+$('#vader').on("click", function (){
+  activePlayer = vader;
+  vader.isActive = true;
+  vader.isPlayer = true;
+  wolf.isPlayer= false;
+  wolf.isActive = false;
+  witch.isPlayer = false;
+  witch.isActive = false;
+});
+
+$('#witch').on("click", function (){
+  activePlayer = witch;
+  witch.isActive = true;
+  witch.isPlayer = true;
+  wolf.isPlayer= false;
+  wolf.isActive = false;
+  vader.isPlayer = false;
+  vader.isActive = false;
+});
+
+$('#computer-game').on("click", function(){
+
+});
+
+$('#player-game').on("click", function(){
+  activePlayer = player2;
+  player2.isActive = true;
+  player2.isPlayer = true;
+  wolf.isActive = false;
+  wolf.isPlayer= false;
+  vader.isPlayer = false;
+  vader.isActive = false;
+  witch.isPlayer = false;
+  witch.isActive = false;
+});
+
+$('.start-game').on("click", function(event){
+  event.preventDefault();
+
+
+  $('.game-selection-wrap').css({
+    "display": "none",
+    "visibility": "hidden",
+    "z-index": "-10"
+  });
+
+  $('.gameboard-wrap').css("visibility", "visible");
+
+  activePlayer.loadPlayer();
+  inactivePlayer.loadPlayer();
+
+  activePlayer.playerTurn();
+  // console.log(activePlayer);
+  // console.log(inactivePlayer);
+
+});
+
+
+
 
 
 

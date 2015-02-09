@@ -7,11 +7,80 @@
 </head>
 <body>
 
+
+<!--************************************************
+
+        Game Selection Div Below
+
+  *************************************************-->
+
+  <div class="game-selection-wrap toggle-div">
+
+  <h1 class="page-title">Choose Your Players</h1>
+
+  <div class="menu-wrap">
+    <form id="game-selections">
+      <div class="hero-select-wrap">
+
+      <h2 class="title selections-title">Puppy Saviors</h2>
+
+
+    <div class="input-wrap">
+    <input type="radio" name="hero-select" value="Gandalf"
+     id="Gandalf"><label for="Gandalf">Gandalf</label><!-- <img src="#" width="50" height="100" />  -->
+    </div>
+
+
+
+    <input type="radio" name="hero-select" value="Hulk"
+     id="Hulk"><label for="Hulk">Hulk</label>
+    <input type="radio" name="hero-select" value="Toto"
+     id="Toto"><label for="Toto">Toto</label>
+
+  </div> <!-- .hero-select-wrap-->
+
+    <div class="villain-select-wrap">
+
+      <h2 class="title selections-title">Puppy Killers</h2>
+
+      <input type="radio" name="villain-select" value="wolf" id="wolf" autofocus><label for="wolf">Big Bad Wolf</label>
+      <input type="radio" name="villain-select" value="vader" id="vader"><label for="vader">Darth Vader</label>
+
+      <input type="radio" name="villain-select" value="witch" id="witch"><label for="witch">Wicked Witch</label>
+
+
+    </div><!-- .villain-select-wrap -->
+
+    <div class="game-type-wrap selections-title">
+      <h2 class="selections-title game-type-title">Choose Your Game Type</h2>
+
+      <input type="radio" name="game-type" id="computer-game" value="Play Computer" class="game-type" ><label for="computer-game" class="input-left">Play the Computer</label>
+      <input type="radio" name="game-type" id="player-game" value="Play another Human Being" class="game-type" ><label for="player-game">Play another Human Being</label>
+
+    </div><!-- .game-type-wrap -->
+
+
+
+    <button type="submit" class="start-game attack" value="startGame">Start Game</button>
+
+  </form>
+
+  </div>
+
+
+  </div><!--  .game-selection-wrap toggle-div -->
+
+
+
+<!--***********************************************
+
+        GameBoard Code Below
+
+**************************************************-->
+
+  <div class="gameboard-wrap">
+
   <h1 class="page-title">Save the Puppy!</h1>
-
-
-
-
 
 
 <!-- ***********************************
@@ -20,45 +89,10 @@
 <!--   <div class="playboard-wrap"> -->
 
     <div class="container">
-  <!--     <div class="pos1-1 box"></div>
-  <div class="pos2-1 box"></div>
-  <div class="pos3-1 box"></div>
-  <div class="pos4-1 box"></div>
-  <div class="pos5-1 box"></div>
-  <div class="pos6-1 box"></div>
-  <div class="pos7-1 box"></div>
-  <div class="pos8-1 box"></div>
-  <div class="pos9-1 box"></div>
-
-  <div class="pos1-2 box"></div>
-  <div class="pos2-2 box"></div>
-  <div class="pos3-2 box"></div>
-  <div class="pos4-2 box"></div>
-  <div class="pos5-2 box"></div>
-  <div class="pos6-2 box"></div>
-  <div class="pos7-2 box"></div>
-  <div class="pos8-2 box"></div>
-  <div class="pos9-2 box"></div>
-
-  <div class="pos1-3 box"></div>
-  <div class="pos2-3 box"></div>
-  <div class="pos3-3 box"></div>
-  <div class="pos4-3 box"></div>
-  <div class="pos5-3 box"></div>
-  <div class="pos6-3 box"></div>
-  <div class="pos7-3 box"></div>
-  <div class="pos8-3 box"></div>
-  <div class="pos9-3 box"></div>
-
-
-  <div class="pos1-4 box"></div>
-  <div class="pos2-4 box"></div>
-  <div class="pos3-4 box"></div>
-  <div class="pos4-4 box"></div> -->
 
 
     </div> <!-- .container -->
-<!--   </div> .playboard-wrap -->
+
 
 <!-- ************************************
         Scoreboard code below
@@ -66,7 +100,7 @@
   <div class="scoreboard-wrap">
   <div class="scoreboard-hero-wrap">
     <h1 class="player-title-hero title text">Player 1</h1>
-    <h2 class="scoreboard text">Weapon</h2>
+    <h2 class="scoreboard-hero  text">Weapon</h2>
     <ul class="weapons markers">
       <li class="weapon1hero"></li>
       <li class="weapon2hero"></li>
@@ -79,7 +113,7 @@
       <li class="health3hero"></li>
     </ul>
 
-    <h2 class="scoreboard text">Health</h2>
+    <h2 class="scoreboard-hero health text">Health</h2>
 
     <button class="hero-attack attack" value="Attack">Attack</button>
 
@@ -87,7 +121,7 @@
 
   <div class="scoreboard-villain-wrap">
     <h1 class="player-title-villain title text">Player 2</h1>
-    <h2 class="scoreboard text">Weapon</h2>
+    <h2 class="scoreboard-villain text">Weapon</h2>
     <ul class="weapons markers">
       <li class="weapon1villain"></li>
       <li class="weapon2villain"></li>
@@ -100,7 +134,7 @@
       <li class="health3villain"></li>
     </ul>
 
-    <h2 class="scoreboard text">Health</h2>
+    <h2 class="scoreboard-villain health text">Health</h2>
 
     <button class="villain-attack attack" value="Attack">Attack</button>
 
@@ -108,6 +142,7 @@
 
 </div><!-- .scoreboard-wrap -->
 
+</div><!-- .gameboard-wrap -->
 
 
 

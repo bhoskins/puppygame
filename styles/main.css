@@ -29,7 +29,8 @@ body {
 .container {
   max-width: 75em;
   margin-left: auto;
-  margin-right: auto; }
+  margin-right: auto;
+  background: #ffe2bf; }
   .container::after {
     clear: both;
     content: "";
@@ -42,7 +43,7 @@ body {
   width: 9.72488%;
   /*   @include omega; */
   margin: 0;
-  border: 1px solid black;
+  /*   border: 1px solid black; */
   width: 11.1111%;
   height: 100px; }
   .box:last-child {
@@ -51,8 +52,69 @@ body {
 .box:nth-child(9n) {
   margin-right: 0; }
 
+.gameboard-wrap {
+  visibility: hidden; }
+
+/***************************************************
+      Game Selection Div Below
+  **************************************************/
+.game-selection-wrap {
+  z-index: 10;
+  background: #fff;
+  width: 100%;
+  height: 800px; }
+
+.menu-wrap {
+  display: block;
+  margin: 0 auto;
+  width: 80%; }
+
+.selections-title {
+  text-align: center;
+  color: blue; }
+
+.hero-select-wrap,
+.villain-select-wrap {
+  display: inline-block;
+  border: 1px solid black;
+  padding: 20px;
+  width: 48%;
+  height: 300px;
+  /*   text-align: center; */ }
+
+.hero-select-wrap input,
+.villain-select-wrap input {
+  display: block;
+  text-align: left; }
+
+.input-wrap {
+  position: relative; }
+
+input {
+  display: inline-block;
+  padding: 20px; }
+
+label {
+  display: inline-block;
+  margin-left: 30px;
+  color: #666;
+  font-size: 5em; }
+
+.start-game {
+  opacity: 1;
+  background-color: blue;
+  color: white; }
+
+.game-type-title {
+  display: block;
+  margin: 20px;
+  font-size: 5em; }
+
+.input-left {
+  margin-right: 50px; }
+
 /********************************
-  Positioning
+  Positioning  Gameboard Below
   ******************************/
 .page-title {
   display: block;
@@ -67,12 +129,14 @@ body {
   position: absolute;
   top: 110px;
   left: 20px;
+  z-index: 0;
   width: 300px; }
 
 .scoreboard-villain-wrap {
   position: absolute;
   top: 110px;
   right: 20px;
+  z-index: 0;
   width: 300px; }
 
 .scoreboard-hero-wrap,
@@ -158,56 +222,5 @@ body {
   border: 3px solid red;
   background: red;
   color: white; }
-
-/***************************************************
-      Select Page styles below
-  **************************************************/
-.menu-wrap {
-  display: block;
-  margin: 0 auto;
-  width: 80%; }
-
-.selections-title {
-  text-align: center;
-  color: blue; }
-
-.hero-select-wrap,
-.villain-select-wrap {
-  display: inline-block;
-  border: 1px solid black;
-  padding: 20px;
-  width: 48%;
-  height: 300px;
-  /*   text-align: center; */ }
-
-.hero-select-wrap input,
-.villain-select-wrap input {
-  display: block;
-  text-align: left; }
-
-.input-wrap {
-  position: relative; }
-
-input {
-  display: inline-block;
-  padding: 20px; }
-
-label {
-  display: inline-block;
-  margin-left: 30px;
-  color: #666;
-  font-size: 5em; }
-
-.start-game {
-  background-color: blue;
-  color: white; }
-
-.game-type-title {
-  display: block;
-  margin: 20px;
-  font-size: 5em; }
-
-.input-left {
-  margin-right: 50px; }
 
 /*# sourceMappingURL=main.css.map */
